@@ -1,0 +1,30 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd (12,11,5,4,3,2);
+//char texto [15];
+String dato;
+int tam;
+int cont=0; 
+
+void setup() {
+  lcd.begin(16,2);
+  Serial.begin(9600);
+  lcd.clear();
+}
+
+void loop() {
+  if (Serial.available()>0){
+    dato=Serial.readString();  
+    tam=dato.length(); 
+   // Serial.println(ingreso);
+    delay(100); 
+    lcd.clear();       
+  }   
+  for(;cont < tam; cont++){
+    lcd.setCursor(cont+2, cont-1); 
+    lcd.print(dato);
+    delay(100);
+    lcd.clear(); 
+    }    
+    lcd.clear();
+    cont=0;
+}
